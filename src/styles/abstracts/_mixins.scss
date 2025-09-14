@@ -1,0 +1,213 @@
+// H1
+@mixin heading-1 {
+    font-family: $font-family;
+    font-weight: 700;
+    font-size: 3.5rem; // 56px
+    line-height: 3.625rem; // 58px
+    letter-spacing: 0.125rem; // 2px
+    text-transform: uppercase;
+    color: $black-hex;
+}
+
+@mixin heading-2 {
+    font-family: $font-family;
+    font-weight: 700;
+    font-size: 2.5rem; // 40 px
+    line-height: 2.75rem; // 44px
+    letter-spacing: 0.094rem; // 1.5px
+    text-transform: uppercase;
+    color: $black-hex;
+}
+
+@mixin heading-3 {
+    font-family: $font-family;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2.25rem;
+    letter-spacing: 0.071875rem;
+    text-transform: uppercase;
+    color: $black-hex;
+}
+
+@mixin heading-4 {
+    font-family: $font-family;
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 2.375rem;
+    letter-spacing: 0.125rem;
+    text-transform: uppercase;
+    color: $black-hex;
+}
+
+@mixin heading-5 {
+    font-family: $font-family;
+    font-weight: 700; // bold
+    font-size: 1.5rem;
+    line-height: 2.0625rem;
+    letter-spacing: 0.10625rem;
+    text-transform: uppercase;
+    color: $black-hex;
+}
+
+@mixin heading-6 {
+    font-family: $font-family;
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.08125rem;
+    text-transform: uppercase;
+    color: $black-hex;
+}
+
+@mixin body-text {
+    font-family: $font-family;
+    font-weight: 500; // medium
+    font-size: 0.9375rem;
+    line-height: 1.5625rem;
+    letter-spacing: 0rem;
+    color: $black-hex;
+}
+
+@mixin overline-text {
+    font-family: $font-family;
+    font-weight: 400; // regular
+    font-size: 0.875rem;
+    line-height: 1.1875rem;
+    letter-spacing: 0.625rem;
+    color: $tangelo-hex;
+}
+
+// HERO MIXINS
+@mixin hero-overline {
+    font-family: $font-family;
+    font-weight: 400; // regular
+    font-size: 0.875rem;
+    letter-spacing: 0.625rem;
+    color: $gray-hex;
+    text-transform: uppercase;
+}
+
+@mixin hero-heading {
+    font-family: $font-family;
+    font-weight: 700;
+    // font-size: 3.5rem; // 56px
+    font-size: clamp(3rem, 6vw, 3.5rem); 
+    line-height: 3.625rem; // 58px
+    letter-spacing: 0.125rem; // 2px
+    text-transform: uppercase;
+    color: $white-hex;
+}
+
+@mixin hero-description {
+    font-family: $font-family;
+    font-weight: 500;
+    font-size: 0.938rem;
+    line-height: 1.563rem;
+    letter-spacing: 0rem;
+    color: $white-hex;
+}
+@mixin subtitle-text {
+    font-family: $font-family;
+    font-weight: 700;
+    font-size: 0.8125rem;
+    line-height: 1.5625rem;
+    letter-spacing: 0.0625rem;
+    color: $tangelo-hex;
+}
+
+@mixin nav-link-text {
+    font-family: $font-family;
+    font-weight: 700;
+    font-size: 0.8125rem;
+    line-height: 1.5625rem;
+    letter-spacing: 0.0625rem;
+    text-transform: uppercase;
+    color: $white-hex;
+  }
+
+  // Cart Item
+
+@mixin cart-item__name {
+    @include body-text;
+    font-weight: 700;   
+    color: $black-hex;   
+    text-transform: none; 
+    line-height: 1.563rem; 
+    letter-spacing: 0;   
+    font-size: 0.938rem; 
+}
+
+@mixin cart-item__price {
+    @include body-text; // base font-family and size
+    font-weight: 700; 
+    color: $gray-hex;  
+    font-size: 0.875rem;
+    line-height: 1.563rem;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+// Footer Mixins
+@mixin footer-text {
+    font-family: $font-family; // Manrope
+    font-weight: 500; // Medium
+    font-size: 0.9375rem; // 15px converted to rem
+    line-height: 1.5625rem; // 25px converted to rem
+    letter-spacing: 0;
+  }
+  
+  // Footer navigation links styling
+  @mixin footer-links {
+    font-family: $font-family; // Manrope
+    font-weight: 700; // Bold
+    font-size: 0.8125rem; // 13px converted to rem
+    line-height: 1.5625rem; // 25px converted to rem
+    letter-spacing: 0.125rem; // 2px converted to rem
+  }
+
+// Buttons Mixin
+
+@mixin button-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    font-family: $font-family;
+    font-weight: 700;
+    font-size: 0.8125rem;
+    letter-spacing: 0.0625rem;
+    text-transform: uppercase;
+  
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  // Label for Text Field (like "Name")
+@mixin form-label {
+    font-family: $font-family; // assuming this is Manrope
+    font-weight: 700;
+    font-size: 0.75rem; // 12px
+    letter-spacing: -0.21px;
+    text-align: left;
+    vertical-align: top;
+  }
+  
+  // Input text + Placeholder text + Radio item name
+  @mixin form-input-text {
+    font-family: $font-family;
+    font-weight: 700;
+    font-size: 0.875rem; // 14px
+    letter-spacing: -0.25px;
+    text-align: left;
+    vertical-align: top;
+  }
+  
+  // Number Picker value (centered)
+  @mixin form-number-value {
+    font-family: $font-family;
+    font-weight: 700;
+    font-size: 0.75rem; // 12px
+    letter-spacing: 1px;
+    text-align: center;
+    vertical-align: top;
+  }
