@@ -1,0 +1,132 @@
+@use "../../styles/abstracts/variables" as vars;
+@use "../../styles/abstracts/mixins" as mix;
+@use "../../styles/base/typography" as typo;
+
+
+.navbar {
+  position: relative;
+  background-color: typo.$black-hex;
+  color: typo.$white-hex;
+  height: 96px;
+  display: flex;
+  align-items: center;
+
+  &__container {
+    max-width: 1110px;
+    margin-inline: auto;
+    width: 100%;
+    padding-inline: clamp(1rem, 5vw, 3rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: clamp(1rem, 4vw, 2.5rem);
+    position: relative;
+  }
+
+  &__logo img {
+    width: 143px;
+  }
+
+  &__links {
+    list-style: none;
+    display: flex;
+    gap: clamp(1.2rem, 3vw, 2.5rem);
+
+    li a {
+      @include mix.nav-link-text;
+
+      &:hover {
+        color: typo.$peru-hex;
+      }
+    }
+  }
+
+  &__cart img {
+    width: 23px;
+    height: 20px;
+  }
+
+  &__toggle {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    height: 80px;
+
+    &__container {
+      position: relative;
+      justify-content: space-between;
+    }
+
+    &__toggle { display: block; order: 1; }
+
+    &__logo {
+      order: 2;
+      img { width: 100px; }
+    }
+
+    &__cart { order: 3; }
+
+    &__links {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: typo.$black-hex;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      padding-block: 2rem;
+      z-index: 10;
+    
+      &.is-open {
+        display: flex;
+      }
+    }
+  }  
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    height: 80px;
+
+    &__container {
+      justify-content: flex-start;
+      position: relative;
+      gap: 0;
+    }
+
+    &__toggle {
+      display: block;
+      order: 1;
+      margin-right: 2.625rem;
+    }
+
+    &__logo {
+      order: 2;
+      img { width: 120px; }
+    }
+
+    &__cart {
+      order: 3;
+      margin-left: auto;
+    }
+
+    &__links {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: typo.$black-hex;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      padding-block: 2rem;
+      z-index: 10;
+    
+      &.is-open {
+        display: flex;
+      }
+    }
+  }  
+}
