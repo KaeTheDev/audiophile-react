@@ -1,0 +1,38 @@
+@use "../../styles/abstracts/mixins" as mix;
+
+.cart-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+
+  &__image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+
+  &__details {
+    flex: 1;
+    padding: 0 1rem;
+  }
+
+  &__name, &__price, &__quantity {
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  &__name {
+    @include mix.cart-item__name;
+  }
+
+  &__price {
+    @include mix.cart-item__price;
+  }
+
+  &__quantity-selector {
+    display: flex;
+    align-items: center;
+  }
+}
