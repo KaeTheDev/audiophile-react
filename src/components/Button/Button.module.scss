@@ -1,0 +1,59 @@
+// src/components/Button/Button.scss
+@use '../../styles/abstracts/variables' as vars;
+@use '../../styles/abstracts/mixins' as mix;
+@use '../../styles/base/typography' as typo;
+
+.btn {
+  @include mix.button-base;
+
+  &--primary,
+  &--outline {
+    padding: 0.9375rem 1.844rem 0.9375rem 1.96875rem;
+    min-width: 160px;
+    height: 48px;
+  }
+
+  &--primary {
+    background-color: typo.$peru-hex;
+    color: typo.$white-hex;
+    border: none;
+
+    &:hover {
+      background-color: typo.$tangelo-hex;
+    }
+  }
+
+  &--outline {
+    background-color: typo.$white-hex;
+    color: typo.$black-hex;
+    border: 1.5px solid typo.$black-hex;
+
+    &:hover {
+      background-color: typo.$black-hex;
+      color: typo.$white-hex;
+    }
+  }
+
+  &--link {
+    padding: 0.25rem 0;
+    background: none;
+    border: none;
+    color: typo.$silver-hex;
+
+    .btn__label {
+      margin-right: 0.833rem;
+    }
+
+    .btn__icon svg path {
+      stroke: typo.$tangelo-hex;
+    }
+
+    &:hover {
+      color: typo.$tangelo-hex;
+
+      .btn__icon svg path {
+        stroke: typo.$tangelo-hex;
+      }
+    }
+  }
+}
