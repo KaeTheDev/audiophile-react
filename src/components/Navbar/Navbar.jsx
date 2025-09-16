@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; // For client-side navigation
 import styles from "./Navbar.module.scss";
+import CartModal from "../CartModal/CartModal";
 
 // Store base URL for public assets
 const BASE_URL = import.meta.env.BASE_URL;
@@ -9,12 +10,19 @@ export default function Navbar() {
   // React state to handle mobile menu toggle
   const [isOpen, setIsOpen] = useState(false);
 
+  // React state to handle cart modal toggle
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const toggleCart = () => {
+    setIsCartOpen(prev => !prev);
+  };
+
   return (
     <header className={styles.navbar}>
       <nav className={styles.navbar__container}>
         {/* Logo */}
         <Link to="/" className={styles.navbar__logo}>
-        <img src={`${BASE_URL}/assets/shared/desktop/logo.svg`} alt="audiophile logo" />
+          <img src={`${BASE_URL}/assets/shared/desktop/logo.svg`} alt="audiophile logo" />
         </Link>
 
         {/* Hamburger button for mobile */}
@@ -23,15 +31,11 @@ export default function Navbar() {
           aria-label="Open Menu"
           onClick={() => setIsOpen(!isOpen)}
         >
-        
-            <img src={`${BASE_URL}/assets/shared/tablet/icon-hamburger.svg`} alt="menu toggle" />
-         
+          <img src={`${BASE_URL}/assets/shared/tablet/icon-hamburger.svg`} alt="menu toggle" />
         </button>
 
         {/* Nav links */}
-        <ul
-          className={`${styles.navbar__links} ${isOpen ? styles.isOpen : ""}`}
-        >
+        <ul className={`${styles.navbar__links} ${isOpen ? styles.isOpen : ""}`}>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -47,9 +51,16 @@ export default function Navbar() {
         </ul>
 
         {/* Cart button */}
-        <button id="cart-toggle" className={styles.navbar__cart}>
+        <button
+          id="cart-toggle"
+          className={styles.navbar__cart}
+          onClick={toggleCart} // <-- toggle modal
+        >
           <img src={`${BASE_URL}/assets/shared/desktop/icon-cart.svg`} alt="cart icon" />
         </button>
+
+        {/* Cart Modal */}
+        {isCartOpen && <CartModal />}
       </nav>
     </header>
   );
