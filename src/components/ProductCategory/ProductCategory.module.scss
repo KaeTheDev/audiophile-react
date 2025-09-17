@@ -1,0 +1,153 @@
+@use "../../styles/abstracts/mixins" as mix;
+@use "../../styles/base/typography" as typo;
+
+.categories {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 2rem;
+  margin: 4rem 0;
+  max-width: 1110px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 clamp(1rem, 5vw, 2rem);
+}
+
+.categories__item {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  height: 204px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  margin-top: 85px; // spacing for image
+}
+
+.categories__box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 204px;
+  background: typo.$flash-white-hex;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(typo.$black-rgb, 0.04);
+  z-index: 0;
+  margin: 0 auto;
+}
+
+// Fixed camelCase naming issue
+.categories__imageWrapper {
+  position: absolute;
+  top: -85px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+.categories__image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  display: block;
+}
+
+.categories__name {
+  z-index: 1;
+  text-align: center;
+  @include mix.heading-6;
+  margin-top: 95px;
+  margin-bottom: 1.2rem;
+}
+
+.categories__link {
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  @include mix.body-text;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  color: typo.$gray-hex;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  margin-bottom: 1rem;
+  
+  &:hover {
+    color: typo.$peru-hex;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .categories__image {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .categories__item {
+    margin-top: 120px;
+  }
+  
+  .categories__imageWrapper {
+    top: -120px;
+  }
+  
+  .categories__name {
+    margin-top: 100px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .categories {
+    gap: 1.5rem;
+  }
+  
+  .categories__item {
+    max-width: 300px;
+  }
+  
+  .categories__image {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .categories {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .categories__item {
+    width: 90vw;
+    max-width: 350px;
+    margin-top: 70px;
+  }
+  
+  .categories__imageWrapper {
+    top: -70px;
+  }
+  
+  .categories__image {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .categories__name {
+    margin-top: 85px;
+  }
+}
