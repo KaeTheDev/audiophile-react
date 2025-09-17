@@ -1,6 +1,7 @@
 import Hero from "../components/Hero/Hero";
 import ProductCategory from "../components/ProductCategory/ProductCategory";
 import data from "../../public/data.json";
+import FeaturedProduct from "../components/FeaturedProduct/FeaturedProduct";
 
 export default function Home() {
   // Categories for ProductCategory
@@ -26,6 +27,7 @@ export default function Home() {
     <div className="page-home">
       <Hero />
       <ProductCategory categories={uniqueCategories} />
+      <FeaturedProduct />
     </div>
   );
 }
