@@ -6,7 +6,7 @@ export default function Category({ category }) { // Receive category as prop
   // Capitalize first letter for display
   const displayName = category ? 
     category.charAt(0).toUpperCase() + category.slice(1) : 
-    'Category';
+    undefined;
 
   const uniqueCategories = [
     {
