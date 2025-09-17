@@ -1,0 +1,182 @@
+@use "../../styles/abstracts/mixins" as mix;
+@use "../../styles/base/typography" as typo;
+
+
+.footer {
+    background-color: typo.$chinese-black-hex;
+    color: typo.$white-hex;
+    padding: 3rem 1rem;
+    text-align: center;
+    position: relative; // Add this for the orange bar positioning
+    
+    // Orange accent bar at the top
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background-color: typo.$peru-hex; 
+      
+      @media (min-width: 768px) {
+        left: 0;
+        transform: none;
+        width: 100px;
+      }
+    }
+    
+    &__container {
+      max-width: 1100px;
+      margin: 0 auto;
+      
+      @media (min-width: 768px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto auto;
+        gap: 2rem;
+        text-align: left;
+      }
+      
+      @media (min-width: 1024px) {
+        grid-template-rows: auto 1fr auto;
+        gap: 2rem 0;
+        align-items: start;
+      }
+    }
+    
+    &__logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+      
+      @media (min-width: 768px) {
+        grid-column: 1;
+        grid-row: 1;
+        justify-content: flex-start;
+        margin-bottom: 0;
+      }
+      
+      img {
+        height: 25px;
+        width: auto;
+      }
+    }
+    
+    &__nav {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      
+      @media (min-width: 768px) {
+        grid-column: 1;
+        grid-row: 2;
+        margin-bottom: 0;
+        text-align: left;
+        flex-direction: row;
+        gap: 0;
+      }
+      
+      @media (min-width: 1024px) {
+        grid-column: 2;
+        grid-row: 1;
+        text-align: right;
+      }
+      
+      &-link {
+        @include mix.footer-links;
+        margin: 0;
+        color: typo.$white-hex;
+        text-decoration: none;
+        transition: color 0.3s ease; // Add smooth transition
+        
+        @media (min-width: 768px) {
+          margin: 0 2rem 0 0;
+        }
+        
+        @media (min-width: 1024px) {
+          margin: 0 0 0 2rem;
+        }
+        
+        &:hover {
+          color: typo.$peru-hex;
+        }
+      }
+    }
+    
+    &__text {
+      @include mix.footer-text;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+      color: typo.$light-gray-hex;
+      
+      @media (min-width: 768px) {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        margin: 0;
+        max-width: none;
+      }
+      
+      @media (min-width: 1024px) {
+        grid-column: 1;
+        grid-row: 2;
+        max-width: 600px;
+        align-self: start;
+      }
+    }
+    
+    &__copyright {
+      @include mix.footer-text;
+      
+      @media (min-width: 768px) {
+        grid-column: 1;
+        grid-row: 4;
+        text-align: left;
+        margin: 0;
+      }
+      
+      @media (min-width: 1024px) {
+        grid-row: 3;
+        align-self: end;
+      }
+    }
+    
+    &__social {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      
+      @media (min-width: 768px) {
+        grid-column: 2;
+        grid-row: 4;
+        justify-content: flex-end;
+        margin-top: 0;
+      }
+      
+      @media (min-width: 1024px) {
+        grid-row: 3;
+        align-self: end;
+      }
+      
+      &-link {
+        display: block;
+        opacity: 0.7;
+        transition: all 0.3s ease; // Changed to 'all' for smooth transitions
+        @include mix.footer-links;
+  
+        &:hover {
+          opacity: 1;
+          // Orange color filter using your peru color variable
+          filter: brightness(0) saturate(100%) invert(58%) sepia(69%) saturate(2006%) hue-rotate(16deg) brightness(97%) contrast(86%);
+        }
+        
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
