@@ -54,7 +54,7 @@ export default function Navbar() {
         <button
           id="cart-toggle"
           className={styles.navbar__cart}
-          onClick={toggleCart} // <-- toggle modal
+          onClick={toggleCart}
         >
           <img src={`${BASE_URL}/assets/shared/desktop/icon-cart.svg`} alt="cart icon" />
         </button>
