@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 // Pages
 import Home from "./pages/Home";
@@ -8,6 +13,7 @@ import Checkout from "./pages/Checkout";
 
 // Components
 import Navbar from "./components/Navbar/Navbar";
+import About from "./components/About/About";
 import Footer from "./components/Footer/Footer";
 
 function App() {
@@ -16,15 +22,55 @@ function App() {
       <Navbar />
       <Routes>
         {/* Home */}
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <Home />
+              <About />
+            </>
+          }
+        />
         <Route path="/home" element={<Navigate replace to="/" />} />
         {/* Category Pages */}
-        <Route path="/headphones" element={<Category category="headphones" />} />
-        <Route path="/speakers" element={<Category category="speakers" />} />
-        <Route path="/earphones" element={<Category category="earphones" />} />
+        <Route
+          path="/headphones"
+          element={
+            <>
+              <Category category="headphones" />
+              <About />
+            </>
+          }
+        />
+        <Route
+          path="/speakers"
+          element={
+            <>
+              <Category category="speakers" />
+              <About />
+            </>
+          }
+        />
+        <Route
+          path="/earphones"
+          element={
+            <>
+              <Category category="earphones" />
+              <About />
+            </>
+          }
+        />
 
         {/* Product Pages (dynamic) */}
-        <Route path="/product/:slug" element={<Product />} />
+        <Route
+          path="/product/:slug"
+          element={
+            <>
+              <Product />
+              <About />
+            </>
+          }
+        />
 
         {/* Checkout */}
         <Route path="/checkout" element={<Checkout />} />
