@@ -1,8 +1,13 @@
 import ProductCategory from "../components/ProductCategory/ProductCategory";
+import CategoryHero from "../components/CategoryHero/CategoryHero";
 import data from "../../public/data.json";
 
-export default function Category({ category }) {
-  // Categories for ProductCategory
+export default function Category({ category }) { // Receive category as prop
+  // Capitalize first letter for display
+  const displayName = category ? 
+    category.charAt(0).toUpperCase() + category.slice(1) : 
+    'Category';
+
   const uniqueCategories = [
     {
       name: "Headphones",
@@ -23,7 +28,7 @@ export default function Category({ category }) {
 
   return (
     <div className="page-category">
-      <h1>{category} Category</h1>
+      <CategoryHero categoryName={displayName} />
       <ProductCategory categories={uniqueCategories} />
     </div>
   );

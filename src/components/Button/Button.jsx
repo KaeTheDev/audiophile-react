@@ -28,8 +28,6 @@ export default function Button({
   icon = null,
   onClick,
 }) {
-  // Debug: log what we're receiving
-  console.log("Button icon prop:", icon);
 
   // Render the appropriate icon based on the icon prop
   const renderIcon = () => {

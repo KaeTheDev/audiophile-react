@@ -1,0 +1,31 @@
+@use '../../styles/abstracts/mixins' as mix;
+@use '../../styles/base/typography' as typo;
+
+
+.category-hero {
+    background-color: typo.$chinese-black-hex;
+    color: typo.$white-hex;
+    text-align: center;
+    padding: 6rem 0;
+    margin-bottom: 4rem;
+    
+    &__content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    &__title {
+      @include mix.heading-2;
+      color: typo.$white-hex;
+      letter-spacing: 0.089rem;
+    }
+    
+    @media (max-width: 768px) {
+      padding: 4rem 0;
+      
+      &__title {
+        font-size: 1.75rem;
+      }
+    }
+  }
