@@ -30,7 +30,7 @@ export default function FeaturedProduct() {
             </p>
 
             <Link
-              to="/product/product-zx9-speaker"
+              to="/product/zx9-speaker"
               className={styles["zx9-btn-link"]}
             >
               <Button
@@ -54,7 +54,7 @@ export default function FeaturedProduct() {
             ZX7 Speaker
           </h2>
           <Link
-            to="/product/product-zx7-speaker"
+            to="/product/zx7-speaker"
             className={styles["featured-products__banner--zx7-content-link"]}
           >
             <Button
@@ -82,7 +82,7 @@ export default function FeaturedProduct() {
         <div className={styles["featured-products__yx1-content-box"]}>
           <h2 className={styles["product-banner__title"]}>YX1 Earphones</h2>
           <Link
-            to="/product/product-yx1-earphones"
+            to="/product/yx1-earphones"
             className={styles["yx1-btn-link"]}
           >
             <Button
