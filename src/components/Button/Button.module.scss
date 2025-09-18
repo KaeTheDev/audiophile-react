@@ -5,7 +5,8 @@
   @include mix.button-base;
 
   &--primary,
-  &--outline {
+  &--outline,
+  &--outline-transparent {
     padding: 0.9375rem 1.844rem 0.9375rem 1.96875rem;
     min-width: 160px;
     height: 48px;
@@ -23,6 +24,17 @@
 
   &--outline {
     background-color: typo.$white-hex;
+    color: typo.$black-hex;
+    border: 1.5px solid typo.$black-hex;
+
+    &:hover {
+      background-color: typo.$black-hex;
+      color: typo.$white-hex;
+    }
+  }
+
+  &--outline-transparent {
+    background-color: transparent;
     color: typo.$black-hex;
     border: 1.5px solid typo.$black-hex;
 
