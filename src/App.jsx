@@ -17,11 +17,9 @@ import About from "./components/About/About";
 import Footer from "./components/Footer/Footer";
 
 function App() {
-  // Use basename only in production (GitHub Pages)
-  const basename = import.meta.env.PROD ? "/audiophile-react" : "";
 
   return (
-    <Router basename={basename}>
+    <Router basename="/audiophile-react/">
       <Navbar />
       <Routes>
         {/* Home */}
