@@ -18,7 +18,7 @@ import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
-    <Router basename="/audiophile-react/">
+    <Router basename="/audiophile-react">
       <Navbar />
       <Routes>
         {/* Home */}

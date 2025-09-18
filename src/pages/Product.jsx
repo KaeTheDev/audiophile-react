@@ -1,9 +1,7 @@
-import { useParams } from "react-router-dom";
 import ProductCategory from "../components/ProductCategory/ProductCategory";
 import data from "../../public/data.json";
 
 export default function Product() {
-  const { slug } = useParams();
 
   // Categories for ProductCategory
   const uniqueCategories = [
@@ -25,8 +23,7 @@ export default function Product() {
   ];
 
   return (
-    <div className="page-product">
-      <h1>Product Page: {slug}</h1>
+    <div className="page-product">    
       <ProductCategory categories={uniqueCategories} />
     </div>
   );
