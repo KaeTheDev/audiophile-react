@@ -1,0 +1,119 @@
+@use "../../styles/abstracts/mixins" as mix;
+@use "../../styles/base/typography" as typo;
+
+
+.product-detail-container {
+    padding: 2rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    @media (min-width: 768px) {
+      padding: 3rem 2rem;
+    }
+    
+    @media (min-width: 1024px) {
+      padding: 4rem 2rem;
+    }
+  }
+  
+  // Main Product Detail Styles
+  .product-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    text-align: left; 
+    
+    @media (min-width: 768px) {
+      flex-direction: row;
+      text-align: left;
+      gap: 4rem;
+      align-items: center;
+    }
+    
+    @media (min-width: 1024px) {
+      gap: 6rem;
+    }
+  
+    &__image-container {
+      width: 100%;
+      max-width: 500px;
+      flex-shrink: 0;
+      
+      @media (min-width: 768px) {
+        max-width: 400px;
+      }
+      
+      @media (min-width: 1024px) {
+        max-width: 540px;
+      }
+      
+      picture, img {
+        width: 100%;
+        border-radius: 1rem;
+        display: block;
+      }
+    }
+  
+    &__info {
+      max-width: 600px;
+      flex: 1;
+      
+      @media (min-width: 768px) {
+        max-width: none;
+      }
+    }
+  
+    &__new {
+      @include mix.overline-text;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      
+      @media (min-width: 768px) {
+        margin-bottom: 1.5rem;
+      }
+    }
+  
+    &__name {
+      @include mix.heading-4;
+      margin-bottom: 1.5rem;
+      
+      @media (min-width: 768px) {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+      }
+    }
+  
+    &__desc {
+      @include mix.body-text;
+      color: typo.$gray-hex;
+      margin-bottom: 1.5rem;
+      
+      @media (min-width: 768px) {
+        margin-bottom: 2rem;
+      }
+    }
+  
+    &__price {
+      @include mix.heading-6;
+      margin-bottom: 2rem;
+  
+      
+      @media (min-width: 768px) {
+        margin-bottom: 2.5rem;
+      }
+    }
+  
+    &__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: stretch;
+      
+      @media (min-width: 480px) {
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+  }  

@@ -1,7 +1,11 @@
+import { useParams } from "react-router-dom";
+import ProductDetail from "../components/ProductDetail/ProductDetail";
 import ProductCategory from "../components/ProductCategory/ProductCategory";
 import data from "../../public/data.json";
 
 export default function Product() {
+  const { slug } = useParams();
+  const product = data.find(item => item.slug === slug);
 
   // Categories for ProductCategory
   const uniqueCategories = [
@@ -22,8 +26,17 @@ export default function Product() {
     }
   ];
 
+  // Handle bad slugs (404-style fallback)
+  if (!product) {
+    return <p>Product not found.</p>;
+  }
+
   return (
-    <div className="page-product">    
+    <div className="page-product">
+      {/* Dynamic product detail */}
+      <ProductDetail product={product} />
+
+      {/* Always show categories below */}
       <ProductCategory categories={uniqueCategories} />
     </div>
   );
