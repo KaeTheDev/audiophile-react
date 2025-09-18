@@ -1,0 +1,15 @@
+@use '../../styles/abstracts/mixins' as mix;
+@use '../../styles/base/typography' as typo;
+
+.go-back-button {
+    @include mix.body-text;
+    background: none;
+    border: none;
+    color: typo.$gray-hex;
+    margin-bottom: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      color: typo.$tangelo-hex;
+    }
+  }
