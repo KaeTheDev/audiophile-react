@@ -1,0 +1,90 @@
+.product-gallery {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 4rem;
+    
+    /* Mobile: Single column */
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+    
+    /* Tablet and Desktop: 2x2 grid layout */
+    @media (min-width: 768px) {
+      grid-template-columns: 2fr 3fr;
+      grid-template-rows: 1fr 1fr;
+      grid-template-areas:
+        "img1 img3"
+        "img2 img3";
+      gap: 2rem;
+      padding: 0 2.5rem;
+    }
+    
+    @media (min-width: 1024px) {
+      gap: 2.5rem;
+      padding: 0 4rem;
+    }
+    
+    @media (min-width: 1200px) {
+      padding: 0 6rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  
+  .product-gallery__item {
+    overflow: hidden;
+    border-radius: 0.5rem;
+    
+    /* Grid area assignments for tablet/desktop */
+    &:nth-child(1) {
+      @media (min-width: 768px) {
+        grid-area: img1;
+      }
+    }
+    
+    &:nth-child(2) {
+      @media (min-width: 768px) {
+        grid-area: img2;
+      }
+    }
+    
+    &:nth-child(3) {
+      @media (min-width: 768px) {
+        grid-area: img3;
+      }
+    }
+  }
+  
+  .product-gallery__image {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    display: block;
+    
+    /* Ensure proper aspect ratios */
+    @media (max-width: 767px) {
+      aspect-ratio: 16/9;
+    }
+    
+    @media (min-width: 768px) {
+      height: 100%;
+      min-height: 174px; /* Ensures proper height for smaller images */
+    }
+  }
+  
+  /* Optional: Add hover effects */
+  .product-gallery__item {
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+  
+  /* Ensure picture element takes full space */
+  .product-gallery__item picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
