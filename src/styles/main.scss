@@ -1,9 +1,9 @@
 // 1. Abstracts
-@import "abstracts/variables";
-@import "abstracts/mixins";
+@forward "abstracts/variables";
+@forward "abstracts/mixins";
 
 
 // 2. Base
-@import "base/reset";
-@import "base/typography";
-@import "base/global";
+@forward "base/reset";
+@forward "base/typography";
+@forward "base/global";

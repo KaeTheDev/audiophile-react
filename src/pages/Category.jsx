@@ -1,7 +1,7 @@
 import ProductCategory from "../components/ProductCategory/ProductCategory";
 import CategoryHero from "../components/CategoryHero/CategoryHero";
 import ProductCard from "../components/ProductCard/ProductCard";
-import data from "../../public/data.json";
+import data from "../../src/data.json";
 
 export default function Category({ category }) {
   // Capitalize first letter for display

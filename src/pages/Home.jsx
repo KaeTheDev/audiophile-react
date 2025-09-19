@@ -1,6 +1,6 @@
 import Hero from "../components/Hero/Hero";
 import ProductCategory from "../components/ProductCategory/ProductCategory";
-import data from "../../public/data.json";
+import data from "../../src/data.json";
 import FeaturedProduct from "../components/FeaturedProduct/FeaturedProduct";
 
 export default function Home() {

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
 import ProductCategory from "../components/ProductCategory/ProductCategory";
-import data from "../../public/data.json";
+import data from "../../src/data.json";
 
 export default function Product() {
   const { slug } = useParams();
