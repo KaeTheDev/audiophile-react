@@ -1,0 +1,101 @@
+@use "../../styles/abstracts/mixins" as mix;
+@use "../../styles/base/typography" as typo;
+
+.product-recommendations {
+    text-align: center;
+    margin-top: 6rem;
+  
+    &__title {
+  @include mix.heading-3;
+    }
+  
+    &__list {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2rem;
+      margin: 4rem 0;
+      max-width: 1110px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 clamp(1rem, 5vw, 2rem);
+      
+      /* Mobile: stack vertically */
+      @media (max-width: 900px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      
+      /* Tablet breakpoint (901px - 1110px) */
+      @media (max-width: 1110px) and (min-width: 901px) {
+        gap: 1.5rem;
+      }
+    }
+  
+    &__card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 350px;
+      
+      @media (max-width: 1110px) and (min-width: 901px) {
+        max-width: 300px;
+      }
+      
+      @media (max-width: 900px) {
+        width: 90vw;
+        max-width: 350px;
+      }
+    }
+  
+    &__image {
+      width: 100%;
+      height: auto;
+      border-radius: 0.75rem;
+      object-fit: contain;
+      background-color: typo.$flash-white-hex;
+      padding: 3rem 2rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      
+      /* Make images bigger and more responsive */
+      min-height: 200px;
+      max-height: 280px;
+      
+      @media (max-width: 767px) {
+        padding: 2.5rem 1.5rem;
+        min-height: 180px;
+        max-height: 250px;
+      }
+      
+      @media (min-width: 768px) and (max-width: 1199px) {
+        padding: 2.5rem 2rem;
+        min-height: 200px;
+        max-height: 260px;
+      }
+      
+      @media (min-width: 1200px) {
+        padding: 3rem 2rem;
+        min-height: 220px;
+        max-height: 280px;
+      }
+    }
+  
+    &__name {
+      @include mix.heading-5;
+      margin: 1rem 0;
+      font-weight: bold;
+    }
+  
+    /* Target the link containing the button */
+    a {
+      text-decoration: none;
+    }
+  
+    /* Style the button itself */
+    &__button {
+      margin-top: 1rem;
+    }
+  }

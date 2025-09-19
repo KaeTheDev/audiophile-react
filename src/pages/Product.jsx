@@ -2,8 +2,10 @@ import { useParams } from "react-router-dom";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
 import ProductCategory from "../components/ProductCategory/ProductCategory";
 import ProductSpecs from "../components/ProductSpecs/ProductSpecs";
-import data from "../../src/data.json";
 import ProductGallery from "../components/ProductGallery/ProductGallery";
+import ProductRecommendations from "../components/ProductRecommendation/ProductRecommendation";
+import data from "../../src/data.json";
+
 
 export default function Product() {
   const { slug } = useParams();
@@ -41,6 +43,8 @@ export default function Product() {
       <ProductSpecs product={product} />
 
       <ProductGallery product={product} />
+
+      <ProductRecommendations product={product} />
 
       {/* Always show categories below */}
       <ProductCategory categories={uniqueCategories} />
