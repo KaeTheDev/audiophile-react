@@ -65,6 +65,7 @@
       font-size: 1.125rem;
       font-weight: 700;
       letter-spacing: 0.0625rem;
+      color: typo.$black-hex;
     }
   }
 
@@ -80,7 +81,7 @@
   }
   .cart-modal__empty {
     text-align: center;
-    color: gray;
+    color: typo.$gray-hex;
     font-size: 0.9rem;
     padding: 1rem 0;
   }
