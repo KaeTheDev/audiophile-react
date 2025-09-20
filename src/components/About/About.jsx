@@ -23,9 +23,9 @@ return (
         </div>
 
         <picture className={styles.about__image}>
-            <source media="(min-width: 1024px)" srcSet={`${BASE_URL}/assets/shared/desktop/image-best-gear.jpg`} />
-            <source media="(min-width: 768px)" srcSet={`${BASE_URL}/assets/shared/tablet/image-best-gear.jpg`} />
-            <img src={`${BASE_URL}/assets/shared/mobile/image-best-gear.jpg`} alt="Man enjoying audio gear" />
+            <source media="(min-width: 1024px)" srcSet={`${BASE_URL}assets/shared/desktop/image-best-gear.jpg`} />
+            <source media="(min-width: 768px)" srcSet={`${BASE_URL}assets/shared/tablet/image-best-gear.jpg`} />
+            <img src={`${BASE_URL}assets/shared/mobile/image-best-gear.jpg`} alt="Man enjoying audio gear" />
         </picture>
     </div>
 </section>

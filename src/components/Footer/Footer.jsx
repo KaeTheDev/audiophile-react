@@ -8,23 +8,24 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.footer__container}>
-        <Link to="./" className={styles.footer__logo}>
+        <Link to="/" className={styles.footer__logo}>
           <img
-            src="/audiophile-react/assets/shared/desktop/logo.svg"
+            src={`${BASE_URL}assets/shared/desktop/logo.svg`}
             alt="Audiophile"
           />
         </Link>
+
         <nav className={styles.footer__nav}>
-          <Link to="./" className={styles["footer__nav-link"]}>
+          <Link to="/" className={styles["footer__nav-link"]}>
             HOME
           </Link>
-          <Link to="./headphones" className={styles["footer__nav-link"]}>
+          <Link to="/headphones" className={styles["footer__nav-link"]}>
             HEADPHONES
           </Link>
-          <Link to="./speakers" className={styles["footer__nav-link"]}>
+          <Link to="/speakers" className={styles["footer__nav-link"]}>
             SPEAKERS
           </Link>
-          <Link to="./earphones" className={styles["footer__nav-link"]}>
+          <Link to="/earphones" className={styles["footer__nav-link"]}>
             EARPHONES
           </Link>
         </nav>
@@ -35,31 +36,30 @@ export default function Footer() {
           helping you get the most out of personal audio. Come and visit our
           demo facility - we're open 7 days a week.
         </p>
+
         <p className={styles.footer__copyright}>
           Copyright 2021. All Rights Reserved
         </p>
 
         <div className={styles.footer__social}>
-          <Link to="#" className={styles["footer__social-link"]}>
+          <a href="#" className={styles["footer__social-link"]}>
             <img
-              src={`${BASE_URL}/assets/shared/desktop/icon-facebook.svg`}
+              src={`${BASE_URL}assets/shared/desktop/icon-facebook.svg`}
               alt="Facebook"
             />
-          </Link>
-
-          <Link to="#" className={styles["footer__social-link"]}>
+          </a>
+          <a href="#" className={styles["footer__social-link"]}>
             <img
-              src={`${BASE_URL}/assets/shared/desktop/icon-twitter.svg`}
+              src={`${BASE_URL}assets/shared/desktop/icon-twitter.svg`}
               alt="Twitter"
             />
-          </Link>
-
-          <Link to="#" className={styles["footer__social-link"]}>
+          </a>
+          <a href="#" className={styles["footer__social-link"]}>
             <img
-              src={`${BASE_URL}/assets/shared/desktop/icon-instagram.svg`}
+              src={`${BASE_URL}assets/shared/desktop/icon-instagram.svg`}
               alt="Instagram"
             />
-          </Link>
+          </a>
         </div>
       </div>
     </footer>

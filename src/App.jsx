@@ -17,9 +17,10 @@ import About from "./components/About/About";
 import Footer from "./components/Footer/Footer";
 
 function App() {
-
+  const basename = process.env.NODE_ENV === "production" ? "/audiophile-react/" : "/";
+  
   return (
-    <Router basename="/audiophile-react/">
+    <Router basename={basename}>
       <Navbar />
       <Routes>
         {/* Home */}

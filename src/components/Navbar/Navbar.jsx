@@ -22,7 +22,7 @@ export default function Navbar() {
       <nav className={styles.navbar__container}>
         {/* Logo */}
         <Link to="/" className={styles.navbar__logo}>
-          <img src={`${BASE_URL}/assets/shared/desktop/logo.svg`} alt="audiophile logo" />
+          <img src={`${BASE_URL}assets/shared/desktop/logo.svg`} alt="audiophile logo" />
         </Link>
 
         {/* Hamburger button for mobile */}
@@ -31,7 +31,7 @@ export default function Navbar() {
           aria-label="Open Menu"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <img src={`${BASE_URL}/assets/shared/tablet/icon-hamburger.svg`} alt="menu toggle" />
+          <img src={`${BASE_URL}assets/shared/tablet/icon-hamburger.svg`} alt="menu toggle" />
         </button>
 
         {/* Nav links */}
@@ -56,7 +56,7 @@ export default function Navbar() {
           className={styles.navbar__cart}
           onClick={toggleCart}
         >
-          <img src={`${BASE_URL}/assets/shared/desktop/icon-cart.svg`} alt="cart icon" />
+          <img src={`${BASE_URL}assets/shared/desktop/icon-cart.svg`} alt="cart icon" />
         </button>
 
         {/* Cart Modal */}

@@ -8,10 +8,10 @@ export default function ProductDetail({ product }) {
   // State for quantity picker
   const [quantity, setQuantity] = useState(1);
 
-  // Helper to generate responsive image paths
+  const BASE_URL = import.meta.env.BASE_URL || "/";
   const getProductImageSrc = (breakpoint) =>
-    `/audiophile-react/assets/product-${product.slug}/${breakpoint}/image-product.jpg`;
-
+    `${BASE_URL}assets/product-${product.slug}/${breakpoint}/image-product.jpg`;
+  
   const handleAddToCart = () => {
     // addItem(product, quantity);
     console.log(`Added ${quantity} of ${product.name} to cart`);
