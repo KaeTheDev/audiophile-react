@@ -11,7 +11,7 @@ const mockItems = [
     price: 2999,
     qty: 1,
     image: {
-      desktop: "/assets/product-xx99-mark-two-headphones/desktop/image-product.jpg",
+      desktop: "assets/product-xx99-mark-two-headphones/desktop/image-product.jpg",
     },
   },
   {
@@ -20,7 +20,7 @@ const mockItems = [
     price: 4500,
     qty: 2,
     image: {
-      desktop: "/assets/product-zx9-speaker/desktop/image-product.jpg",
+      desktop: "assets/product-zx9-speaker/desktop/image-product.jpg",
     },
   },
 ];
