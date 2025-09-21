@@ -11,7 +11,7 @@ export default function RadioGroup({ legend, name, options, value, onChange }) {
             name={name}
             value={option.value}
             checked={value === option.value}
-            onChange={(e) => onChange && onChange(e)}
+            onChange={() => onChange && onChange(option.value)}
             className={styles["radio-input"]}
           />
           <span className={styles["radio-mark"]}></span>
