@@ -27,6 +27,7 @@ export default function Button({
   type = "button",
   icon = null,
   onClick,
+  fullWidth = false
 }) {
 
   // Render the appropriate icon based on the icon prop
@@ -43,7 +44,7 @@ export default function Button({
 
   return (
     <button
-      className={`${styles.btn} ${styles[`btn--${variant}`]}`}
+    className={`${styles.btn} ${styles[`btn--${variant}`]} ${fullWidth ? styles['btn--full-width'] : ''}`}
       type={type}
       onClick={onClick}
     >

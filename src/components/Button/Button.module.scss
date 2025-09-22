@@ -11,6 +11,11 @@
     min-width: 160px;
     height: 48px;
   }
+  &--full-width {
+    width: 100%;
+    min-width: unset; // This overrides the 160px min-width
+    box-sizing: border-box;
+  }
 
   &--primary {
     background-color: typo.$peru-hex;
