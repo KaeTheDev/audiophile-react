@@ -2,304 +2,268 @@
 @use "../../styles/base/typography" as typo;
 
 .checkout-form {
-    background: typo.$white-hex;
-    border-radius: 0.75rem;
-    padding: 2.5rem 2rem 2rem 2rem;
-    max-width: 730px;
-    width: 100%; /* Ensure it doesn't exceed container */
-    margin: 0 auto;
-    box-shadow: 0 1.5px 16px rgba(32,32,32,0.04);
-    box-sizing: border-box; /* Include padding in width calculation */
-    
-    &__title {
-      @include mix.heading-3;
-    }
-  
-    fieldset {
-      border: none;
-      margin-bottom: 3rem;
-      padding: 0;
-      min-width: 0; /* Allow fieldset to shrink */
-    }
-  
-    &__legend, legend {
-      @include mix.body-text;
-      font-weight: 700;
-      color: typo.$peru-hex;
-      margin-bottom: 1.5rem;
-    }
-  
-    /* Used for each group of fields, whether 1 or 2 wide */
-    &__row {
-      flex-wrap: wrap;
-      display: flex;
-      gap: 1.5rem; /* Reduced from 2rem */
-      margin-bottom: 1.5rem;
-      width: 100%;
-      min-width: 0; /* Allow row to shrink */
-      &:last-child { margin-bottom: 0;}
-    }
-  
-    /* All form fields */
-    &__row > * {
+  background: typo.$white-hex;
+  border-radius: 0.75rem;
+  padding: 2.5rem 2rem 2rem 2rem;
+  max-width: 730px;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(32, 32, 32, 0.12);
+  box-sizing: border-box;
+
+  &__title {
+    @include mix.heading-3;
+  }
+
+  fieldset {
+    border: none;
+    margin-bottom: 3rem;
+    padding: 0;
+    min-width: 0;
+  }
+
+  &__legend,
+  legend {
+    @include mix.body-text;
+    font-weight: 700;
+    color: typo.$peru-hex;
+    margin-bottom: 1.5rem;
+  }
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    min-width: 0;
+
+    > * {
       flex: 1 1 0;
-      min-width: 0; /* Critical: allows flex items to shrink below content size */
+      min-width: 0;
       max-width: 100%;
     }
-  
-    /* --- Payment method row (label left, content right) */
-    .payment-method-row {
-      align-items: flex-start;
-      gap: 1.5rem; /* Reduced from 2rem */
-      margin-top: 1.25rem;
-      margin-bottom: 1.5rem;
+
+    > div[class*="_form-field--text"] {
+      max-width: 100%;
+      width: 100%;
+      margin: 0;
+      flex: 1 1 0;
+      min-width: 0;
     }
-  
-    .payment-label-col {
-      flex: 1 1 24%;
-      max-width: 155px;
-      font-weight: 600;
-      color: typo.$gray-hex;
-      letter-spacing: 0.5px;
-      font-size: 1rem;
-      padding-top: 0.6rem;
-    }
-  
-    .payment-options-col {
-      flex: 1 1 72%;
-      display: flex;
+
+    @media (max-width: 700px) {
       flex-direction: column;
       gap: 1rem;
-      width: 100%;
-      min-width: 0;
-    }
-  
-    /* --- e-Money fields: full width row like other sections */
-    .e-money-fields-row {
-      display: flex;
-      gap: 1.5rem; /* Reduced from 2rem */
-      width: 100%;
-      margin-bottom: 1.5rem;
-      min-width: 0;
-      
+
       > * {
-        flex: 1 1 0;
-        min-width: 0;
         max-width: 100%;
       }
-    }
-  
-    /* --- Cash on Delivery message */
-    .cod-message {
-      display: flex;
-      gap: 1.5rem; /* Reduced from 2rem */
-      align-items: flex-start;
-      padding: 1.5rem 0;
-      
-      &__icon {
-        flex-shrink: 0;
-        width: 48px;
-        height: 48px;
-      }
-      
-      &__text {
-        flex: 1;
-        min-width: 0;
-        
-        p {
-          @include mix.body-text;
-          margin: 0;
-          color: typo.$gray-hex;
-          font-size: 1rem;
-          line-height: 1.6;
-        }
-      }
-    }
-  
-    /* --- Inputs and their group wrappers */
-    &__group {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      min-width: 0;
-      
-      label {
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        color: typo.$light-gray-hex;
-        font-size: 1rem;
-        letter-spacing: 0.5px;
-      }
-      
-      input[type="text"],
-      input[type="email"],
-      input[type="tel"] {
-        border: 1.5px solid typo.$light-gray-hex;
-        border-radius: 0.5rem;
-        background: typo.$light-gray-hex;
-        padding: 1.1rem 1.2rem;
-        font-size: 1.06rem;
-        color: typo.$chinese-black-hex;
-        transition: border 0.2s;
-        outline: none;
+
+      > div[class*="_form-field--text"] {
+        max-width: 100%;
         width: 100%;
-        box-sizing: border-box;
-        min-width: 0;
-        overflow: hidden; /* Prevent internal scrolling */
-        text-overflow: ellipsis; /* Show ... when text is too long */
-        
-        &:focus {
-          border-color: typo.$peru-hex;
-        }
-        
-        &::placeholder {
-          color: typo.$light-gray-hex;
-          opacity: 0.8;
-        }
-      }
-    }
-  
-    /* --- Radios, horizontal at desktop, stacked mobile */
-    .checkout-form__radio-group {
-      display: flex;
-      flex-direction: row;
-      gap: 1rem; /* Reduced from 1.25rem */
-      width: 100%;
-      min-width: 0;
-      
-      label {
-        flex: 1 1 0;
-        background: typo.$light-gray-hex;
-        padding: 1.15rem 1.2rem;
-        border-radius: 0.49rem;
-        border: 1.5px solid typo.$light-gray-hex;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        font-weight: 500;
-        font-size: 1.13rem;
-        transition: border-color 0.2s;
-        min-width: 0;
-        box-sizing: border-box;
-      }
-      
-      input[type="radio"] {
-        accent-color: typo.$peru-hex;
-        min-width: 1.15rem;
-        min-height: 1.15rem;
-        margin-right: 1rem;
-        margin-left: 0.05rem;
-        flex-shrink: 0;
-      }
-      
-      input[type="radio"]:checked + span {
-        color: typo.$peru-hex;
-      }
-      
-      input[type="radio"]:checked ~ label {
-        border-color: typo.$peru-hex;
-      }
-    }
-  
-    /* --- Responsive layout */
-    @media (max-width: 900px) {
-      padding: 2rem 1.5rem; /* Reduced horizontal padding */
-      
-      &__row, .e-money-fields-row {
-        gap: 1rem; /* Further reduced gap */
-      }
-      
-      .payment-method-row {
-        gap: 1rem;
-      }
-      
-      .cod-message {
-        gap: 1rem;
-      }
-    }
-  
-    @media (max-width: 700px) {
-      padding: 1.5rem 1rem;
-      &__title { 
-        font-size: 1.75rem;
-        margin-bottom: 1.5rem;
-      }
-      .payment-label-col { 
-        max-width: 100%; 
-        padding: 0;
-      }
-      
-      &__row, .e-money-fields-row {
-        gap: 0.75rem;
-      }
-      
-      /* Reduce input padding on medium screens */
-      &__group input[type="text"],
-      &__group input[type="email"],
-      &__group input[type="tel"] {
-        padding: 1rem 1rem;
-        font-size: 1rem;
-      }
-    }
-  
-    @media (max-width: 600px) {
-      border-radius: 0.45rem;
-      padding: 1rem 0.75rem; /* Minimal padding */
-      box-shadow: none;
-      
-      &__title {
-        font-size: 1.5rem;
-        margin-bottom: 1.25rem;
-      }
-      
-      &__row, .e-money-fields-row {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      
-      .payment-method-row { 
-        flex-direction: column; 
-        gap: 1rem;
-      }
-      
-      .payment-label-col, .payment-options-col { 
-        max-width: 100%; 
-        flex: 1 1 100%; 
-        padding: 0;
-      }
-      
-      .checkout-form__radio-group { 
-        flex-direction: column; 
-        gap: 1rem;
-      }
-      
-      .cod-message {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-        
-        &__icon {
-          align-self: center;
-        }
-      }
-    }
-  
-    /* --- Extra small screens (phones in portrait) */
-    @media (max-width: 400px) {
-      padding: 0.75rem 0.5rem;
-      
-      &__title {
-        font-size: 1.35rem;
-      }
-      
-      &__group input[type="text"],
-      &__group input[type="email"],
-      &__group input[type="tel"] {
-        padding: 0.8rem 0.75rem; /* Further reduced padding for small screens */
-        font-size: 1rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        margin: 0;
       }
     }
   }
+
+  > fieldset > div[class*="_form-field--text"],
+  > fieldset > div:not(.checkout-form__row) > div[class*="_form-field--text"] {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+
+    label {
+      @include mix.form-label;
+      margin-bottom: 0.5rem;
+      color: typo.$gray-hex;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      border: 1.5px solid typo.$light-gray-hex;
+      border-radius: 0.5rem;
+      background: typo.$light-gray-hex;
+      padding: 1.1rem 1.2rem;
+      @include mix.form-input-text;
+      color: typo.$chinese-black-hex;
+      transition: border 0.2s;
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:focus {
+        border-color: typo.$peru-hex;
+      }
+
+      &::placeholder {
+        color: typo.$gray-hex;
+        opacity: 0.8;
+      }
+    }
+  }
+
+  /* Payment method label text styling */
+  .payment-label-col {
+    flex: 1 1 24%;
+    max-width: 155px;
+    @include mix.form-label;
+    color: typo.$gray-hex;
+    padding-top: 0.6rem;
+  }
+
+  /* Payment options container */
+  .payment-options-col {
+    flex: 1 1 72%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Updated Payment Method Radio Group */
+  .checkout-form__radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+
+    label {
+      background: typo.$white-hex;
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      border: 1.5px solid typo.$silver-hex;
+      cursor: pointer;
+      @include mix.form-input-text;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+      min-width: 0;
+
+      input[type="radio"] {
+        accent-color: typo.$peru-hex;
+        width: 20px;
+        height: 20px;
+        margin: 0;
+      }
+
+      &:hover,
+      input[type="radio"]:focus-visible + & {
+        border-color: typo.$peru-hex;
+      }
+    }
+
+    input[type="radio"]:checked + label {
+      border: 2px solid typo.$peru-hex;
+      background: lighten(typo.$peru-hex, 45%);
+    }
+  }
+
+  /* Cash on Delivery message */
+  .cod-message {
+    margin-top: 1rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: 12px;
+    background: typo.$ivory-hex;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+
+    &__icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    &__text {
+      flex: 1;
+      min-width: 0;
+
+      p {
+        @include mix.body-text;
+        color: typo.$gray-hex;
+        margin: 0;
+      }
+    }
+  }
+
+  /* Responsive layout */
+  @media (max-width: 900px) {
+    padding: 2rem 1.5rem;
+
+    &__row {
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 700px) {
+    padding: 1.5rem 1rem;
+
+    &__title {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &__row {
+      gap: 0.75rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    border-radius: 0.45rem;
+    padding: 1rem 1rem;
+    box-shadow: none;
+
+    &__title {
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    &__row {
+      flex-direction: column;
+      gap: 1rem;
+
+      > * {
+        max-width: 100%;
+      }
+
+      > div[class*="_form-field--text"] {
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+      }
+    }
+  }
+
+  @media (max-width: 400px) {
+    padding: 0.75rem 0.5rem;
+
+    &__title {
+      font-size: 1.35rem;
+    }
+
+    &__group input[type="text"],
+    &__group input[type="email"],
+    &__group input[type="tel"] {
+      padding: 0.8rem 0.75rem;
+      font-size: 1rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
