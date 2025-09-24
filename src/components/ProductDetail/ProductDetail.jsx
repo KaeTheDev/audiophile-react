@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useCartDispatch } from "../../context/CartContext";
+import { useCartModal } from "../../context/CartModalContext";
 import styles from "./ProductDetail.module.scss";
 import BackButton from "../BackButton/BackButton";
 import NumberPicker from "../form-elements/NumberPicker";
@@ -7,18 +8,17 @@ import Button from "../Button/Button";
 import toast from "react-hot-toast";
 
 export default function ProductDetail({ product }) {
-  // State for quantity picker
   const [quantity, setQuantity] = useState(1);
   const dispatch = useCartDispatch();
+  const { setIsCartOpen } = useCartModal();
 
   const BASE_URL = import.meta.env.BASE_URL || "/";
   const getProductImageSrc = (breakpoint) =>
     `${BASE_URL}assets/product-${product.slug}/${breakpoint}/image-product.jpg`;
-  
+
   const handleAddToCart = () => {
     dispatch({ type: "ADD_ITEM", payload: { product, quantity } });
-  
-    // Show a custom toast
+    setIsCartOpen(true); // Always open cart on add
     toast.custom((t) => (
       <div className={`toast ${t.visible ? "is-visible" : ""}`}>
         <div className="toast__message">
@@ -49,13 +49,11 @@ export default function ProductDetail({ product }) {
             />
           </picture>
         </div>
-
-      {/* Product Info */}
-      <div className={styles["product-detail__info"]}>
+        <div className={styles["product-detail__info"]}>
           {product.new && (
-            <p className={`${styles["product-detail__new"]} overline`}>
-              NEW PRODUCT
-            </p>
+              <p className={`${styles["product-detail__new"]} overline`}>
+                NEW PRODUCT
+              </p>
           )}
           <h1 className={`${styles["product-detail__name"]} heading-2`}>
             {product.name}
@@ -66,8 +64,6 @@ export default function ProductDetail({ product }) {
           <p className={`${styles["product-detail__price"]} heading-6`}>
             ${product.price.toLocaleString()}
           </p>
-
-          {/* Actions */}
           <div className={styles["product-detail__actions"]}>
             <NumberPicker
               value={quantity}

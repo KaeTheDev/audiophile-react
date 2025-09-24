@@ -1,7 +1,6 @@
 @use "../../styles/abstracts/mixins" as mix;
 @use "../../styles/base/typography" as typo;
 
-
 .cart-modal {
   display: none;
   position: fixed;
@@ -12,9 +11,21 @@
   padding: 2rem;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
   z-index: 999;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 
   &.is-visible {
     display: block;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &.fade-out {
+    display: block;
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
   }
 
   &__header {
@@ -35,7 +46,6 @@
     font-size: 0.875rem;
     cursor: pointer;
     transition: color 0.2s ease;
-
     &:hover { color: typo.$tangelo-hex; }
   }
 
@@ -73,17 +83,16 @@
     width: 313px;
     height: 48px;
     margin-inline: auto;
-
     button {
       width: 100%;
       height: 100%;
     }
   }
+
   .cart-modal__empty {
     text-align: center;
     color: typo.$gray-hex;
     font-size: 0.9rem;
     padding: 1rem 0;
   }
-  
 }

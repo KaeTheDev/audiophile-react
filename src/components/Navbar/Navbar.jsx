@@ -1,31 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // For client-side navigation
+import { Link } from "react-router-dom";
 import styles from "./Navbar.module.scss";
 import CartModal from "../CartModal/CartModal";
+import { useCartModal } from "../../context/CartModalContext";
 
-// Store base URL for public assets
 const BASE_URL = import.meta.env.BASE_URL;
 
 export default function Navbar() {
-  // React state to handle mobile menu toggle
+  // Mobile menu toggle
   const [isOpen, setIsOpen] = useState(false);
 
-  // React state to handle cart modal toggle
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  // Cart modal context
+  const { isCartOpen, setIsCartOpen } = useCartModal();
 
-  const toggleCart = () => {
-    setIsCartOpen(prev => !prev);
-  };
+  const toggleCart = () => setIsCartOpen((prev) => !prev);
 
   return (
     <header className={styles.navbar}>
       <nav className={styles.navbar__container}>
-        {/* Logo */}
         <Link to="/" className={styles.navbar__logo}>
           <img src={`${BASE_URL}assets/shared/desktop/logo.svg`} alt="audiophile logo" />
         </Link>
-
-        {/* Hamburger button for mobile */}
         <button
           className={styles.navbar__toggle}
           aria-label="Open Menu"
@@ -33,24 +28,12 @@ export default function Navbar() {
         >
           <img src={`${BASE_URL}assets/shared/tablet/icon-hamburger.svg`} alt="menu toggle" />
         </button>
-
-        {/* Nav links */}
         <ul className={`${styles.navbar__links} ${isOpen ? styles.isOpen : ""}`}>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/headphones">Headphones</Link>
-          </li>
-          <li>
-            <Link to="/speakers">Speakers</Link>
-          </li>
-          <li>
-            <Link to="/earphones">Earphones</Link>
-          </li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/headphones">Headphones</Link></li>
+          <li><Link to="/speakers">Speakers</Link></li>
+          <li><Link to="/earphones">Earphones</Link></li>
         </ul>
-
-        {/* Cart button */}
         <button
           id="cart-toggle"
           className={styles.navbar__cart}
@@ -58,8 +41,6 @@ export default function Navbar() {
         >
           <img src={`${BASE_URL}assets/shared/desktop/icon-cart.svg`} alt="cart icon" />
         </button>
-
-        {/* Cart Modal */}
         {isCartOpen && <CartModal />}
       </nav>
     </header>
