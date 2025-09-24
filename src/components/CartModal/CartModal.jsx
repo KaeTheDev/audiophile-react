@@ -1,3 +1,89 @@
+// import React, { useEffect, useState } from "react";
+// import styles from "./CartModal.module.scss";
+// import CartItem from "../CartItem/CartItem";
+// import Button from "../Button/Button";
+// import { useCart, useCartDispatch } from "../../context/CartContext";
+// import { useCartModal } from "../../context/CartModalContext";
+
+// export default function CartModal() {
+//   const items = useCart();
+//   const dispatch = useCartDispatch();
+//   const { setIsCartOpen } = useCartModal();
+//   const [isClosing, setIsClosing] = useState(false);
+
+//   const total = items.reduce((acc, item) => acc + item.price * item.qty, 0);
+//   const totalItems = items.reduce((acc, item) => acc + item.qty, 0);
+
+//   // Start fade-out closing animation 2 seconds after mount
+//   useEffect(() => {
+//     const timer = setTimeout(() => setIsClosing(true), 2000);
+//     return () => clearTimeout(timer);
+//   }, []);
+
+//   // Remove modal completely 400ms after starting close animation
+//   useEffect(() => {
+//     if (isClosing) {
+//       const timer = setTimeout(() => setIsCartOpen(false), 400);
+//       return () => clearTimeout(timer);
+//     }
+//   }, [isClosing, setIsCartOpen]);
+
+//   return (
+//     <div
+//       className={`${styles["cart-modal"]} ${
+//         isClosing ? styles["fade-out"] : styles["is-visible"]
+//       }`}
+//     >
+//       <div className={styles["cart-modal__header"]}>
+//         <h2 className={styles["cart-modal__title"]}>Cart ({totalItems})</h2>
+//         <button
+//           className={styles["cart-modal__remove-all"]}
+//           onClick={() => dispatch({ type: "CLEAR" })}
+//         >
+//           Remove All
+//         </button>
+//       </div>
+//       <div className={styles["cart-modal__items"]}>
+//         {items.length === 0 ? (
+//           <p className={styles["cart-modal__empty"]}>
+//             Your cart is empty.
+//             <br />
+//             Ready to upgrade your sound? 🎧
+//             <br />
+//             <a href="/index.html" className={styles["cart-modal__shop-link"]}>
+//               Continue Shopping
+//             </a>
+//           </p>
+//         ) : (
+//           items.map((item) => (
+//             <CartItem
+//               key={item.slug}
+//               slug={item.slug}
+//               name={item.name}
+//               price={item.price}
+//               qty={item.qty}
+//               image={item.image.desktop || item.image}
+//               onQtyChange={(slug, qty) =>
+//                 dispatch({ type: "UPDATE_QTY", payload: { slug, qty } })
+//               }
+//               onRemove={() => dispatch({ type: "REMOVE_ITEM", payload: { slug: item.slug } })}
+//             />
+//           ))
+//         )}
+//       </div>
+//       <div className={styles["cart-modal__total"]}>
+//         <span>Total</span>
+//         <span className={styles["cart-modal__total-price"]}>
+//           ${total.toLocaleString()}
+//         </span>
+//       </div>
+//       <div className={styles["cart-modal__checkout"]}>
+//         <Button label="Checkout" variant="primary" onClick={() => window.location.href = "/checkout"} />
+//       </div>
+//     </div>
+//   );
+// }
+
 import React, { useEffect, useState } from "react";
 import styles from "./CartModal.module.scss";
 import CartItem from "../CartItem/CartItem";
@@ -11,16 +97,17 @@ export default function CartModal() {
   const { setIsCartOpen } = useCartModal();
   const [isClosing, setIsClosing] = useState(false);
 
+  const BASE_URL = import.meta.env.BASE_URL || "/";
+
   const total = items.reduce((acc, item) => acc + item.price * item.qty, 0);
   const totalItems = items.reduce((acc, item) => acc + item.qty, 0);
 
-  // Start fade-out closing animation 2 seconds after mount
+  // Optional fade-out animation
   useEffect(() => {
     const timer = setTimeout(() => setIsClosing(true), 2000);
     return () => clearTimeout(timer);
   }, []);
 
-  // Remove modal completely 400ms after starting close animation
   useEffect(() => {
     if (isClosing) {
       const timer = setTimeout(() => setIsCartOpen(false), 400);
@@ -34,6 +121,7 @@ export default function CartModal() {
         isClosing ? styles["fade-out"] : styles["is-visible"]
       }`}
     >
+      {/* Header */}
       <div className={styles["cart-modal__header"]}>
         <h2 className={styles["cart-modal__title"]}>Cart ({totalItems})</h2>
         <button
@@ -43,6 +131,8 @@ export default function CartModal() {
           Remove All
         </button>
       </div>
+
+      {/* Items */}
       <div className={styles["cart-modal__items"]}>
         {items.length === 0 ? (
           <p className={styles["cart-modal__empty"]}>
@@ -50,7 +140,7 @@ export default function CartModal() {
             <br />
             Ready to upgrade your sound? 🎧
             <br />
-            <a href="/index.html" className={styles["cart-modal__shop-link"]}>
+            <a href={`${BASE_URL}index.html`} className={styles["cart-modal__shop-link"]}>
               Continue Shopping
             </a>
           </p>
@@ -62,23 +152,33 @@ export default function CartModal() {
               name={item.name}
               price={item.price}
               qty={item.qty}
-              image={item.image.desktop || item.image}
+              image={`${BASE_URL}assets/product-${item.slug}/desktop/image-product.jpg`}
               onQtyChange={(slug, qty) =>
                 dispatch({ type: "UPDATE_QTY", payload: { slug, qty } })
               }
-              onRemove={() => dispatch({ type: "REMOVE_ITEM", payload: { slug: item.slug } })}
+              onRemove={() =>
+                dispatch({ type: "REMOVE_ITEM", payload: { slug: item.slug } })
+              }
             />
           ))
         )}
       </div>
+
+      {/* Total */}
       <div className={styles["cart-modal__total"]}>
         <span>Total</span>
         <span className={styles["cart-modal__total-price"]}>
           ${total.toLocaleString()}
         </span>
       </div>
+
+      {/* Checkout */}
       <div className={styles["cart-modal__checkout"]}>
-        <Button label="Checkout" variant="primary" onClick={() => window.location.href = "/checkout"} />
+        <Button
+          label="Checkout"
+          variant="primary"
+          onClick={() => (window.location.href = `${BASE_URL}checkout`)}
+        />
       </div>
     </div>
   );
