@@ -30,15 +30,12 @@ export default function OrderConfirmation({ order, onClose }) {
   
   // ✅ Fixed: Use the same image logic as OrderSummary
   const getImageSrc = (img) => {
-    console.log("Processing image:", img); // Debug log
     if (!img) return "";
     if (typeof img === "string") {
       const result = img.startsWith("/") ? img : `/${img}`;
-      console.log("String image result:", result); // Debug log
       return result;
     }
     const result = img.desktop || img.tablet || img.mobile || "";
-    console.log("Object image result:", result); // Debug log
     return result;
   };
 
@@ -64,7 +61,6 @@ export default function OrderConfirmation({ order, onClose }) {
                   alt={safeOrder.items[0].name || "Product"}
                   className={styles["order-confirmation__item-img"]}
                   onError={(e) => {
-                    console.log("Image failed to load:", e.target.src);
                     e.target.style.display = 'none'; // Hide broken images
                   }}
                 />

@@ -4,6 +4,7 @@ import styles from "./ProductDetail.module.scss";
 import BackButton from "../BackButton/BackButton";
 import NumberPicker from "../form-elements/NumberPicker";
 import Button from "../Button/Button";
+import toast from "react-hot-toast";
 
 export default function ProductDetail({ product }) {
   // State for quantity picker
@@ -15,7 +16,16 @@ export default function ProductDetail({ product }) {
     `${BASE_URL}assets/product-${product.slug}/${breakpoint}/image-product.jpg`;
   
   const handleAddToCart = () => {
-    dispatch({ type: "ADD_ITEM", payload: { product, quantity}});
+    dispatch({ type: "ADD_ITEM", payload: { product, quantity } });
+  
+    // Show a custom toast
+    toast.custom((t) => (
+      <div className={`toast ${t.visible ? "is-visible" : ""}`}>
+        <div className="toast__message">
+          ✅ {quantity} × <span>{product.name}</span> added to cart
+        </div>
+      </div>
+    ));
   };
 
   return (

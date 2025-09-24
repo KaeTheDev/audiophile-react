@@ -1,0 +1,45 @@
+@use "../styles/abstracts/mixins" as mix;
+@use "../styles/base/typography" as typo;
+@use "../styles/abstracts/variables" as vars;
+
+.toast {
+  position: fixed;
+  top: 5rem; // below navbar
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background-color: typo.$peru-hex; // use theme color
+  color: typo.$flash-white-hex;     // use theme white
+  padding: 1rem 2rem;
+  border-radius: 0.5rem; // 8px
+  font-family: vars.$font-family; 
+  font-weight: 700;
+  font-size: 0.875rem; // 14px
+  text-transform: uppercase;
+  letter-spacing: 0.0625rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 2000; // above navbar
+  box-shadow: 0 0.25rem 1rem rgba(typo.$chinese-black-rgb, 0.25);
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0); // slide in
+  }
+
+  .toast__message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    // ✅ icon and text
+    span {
+      font-weight: 900; // bold
+      color: typo.$flash-white-hex;
+    }
+
+    // optional: you can use a mixin if you want consistent body font
+    @include mix.body-text;
+  }
+}
