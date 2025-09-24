@@ -1,7 +1,28 @@
 import styles from "./OrderSummary.module.scss";
 import Button from "../Button/Button";
 
-export default function OrderSummary({ items = [], total = 0, shipping = 0, vat = 0, grandTotal = 0, onSubmit,   className = "", }) {
+export default function OrderSummary({ items = [], onSubmit }) {
+  // Calculate totals
+  const total = items.reduce((acc, item) => acc + item.price * item.qty, 0);
+  const shipping = items.length > 0 ? 50 : 0;
+  const vat = total * 0.2; // 20% of product total
+  const grandTotal = total + shipping + vat;
+
+  // Helper to get image URL
+  const getImageSrc = (img) => {
+    if (!img) return "";
+    if (typeof img === "string") return img.startsWith("/") ? img : `/${img}`;
+    return img.desktop || img.tablet || img.mobile || "";
+  };
+
+  const handleSubmit = () => {
+    if (items.length === 0) {
+      alert("Your cart is empty. Please add items before proceeding.");
+      return;
+    }
+    onSubmit();
+  };
+
   return (
     <aside className={styles["order-summary"]}>
       <h2 className={styles["order-summary__title"]}>Summary</h2>
@@ -11,10 +32,12 @@ export default function OrderSummary({ items = [], total = 0, shipping = 0, vat 
         {items.length > 0 ? (
           items.map((item, idx) => (
             <div key={idx} className={styles["order-summary__item"]}>
-              <img src={item.image} alt={item.name} />
+              <img src={getImageSrc(item.image)} alt={item.name} />
               <div className={styles["order-summary__info"]}>
                 <p className={styles["order-summary__name"]}>{item.name}</p>
-                <p className={styles["order-summary__price"]}>${item.price.toLocaleString()}</p>
+                <p className={styles["order-summary__price"]}>
+                  ${item.price.toLocaleString()}
+                </p>
               </div>
               <p className={styles["order-summary__quantity"]}>x{item.qty}</p>
             </div>
@@ -35,11 +58,13 @@ export default function OrderSummary({ items = [], total = 0, shipping = 0, vat 
           <span>${shipping.toLocaleString()}</span>
         </div>
         <div>
-          <span>VAT (Included)</span>
-          <span>${vat.toFixed(1)}</span>
+          <span>VAT (20%)</span>
+          <span>${vat.toLocaleString()}</span>
         </div>
         <div className={styles["order-summary__grand-total"]}>
-          <span className={styles["order-summary__grand-total-label"]}>Grand Total</span>
+          <span className={styles["order-summary__grand-total-label"]}>
+            Grand Total
+          </span>
           <span className={styles["order-summary__grand-total-amount"]}>
             ${grandTotal.toLocaleString()}
           </span>
@@ -50,9 +75,10 @@ export default function OrderSummary({ items = [], total = 0, shipping = 0, vat 
       <Button
         label="Continue & Pay"
         type="button"
-        variant="primary"  
-        fullWidth={true} 
-        onClick={onSubmit ? onSubmit : () => console.log("Submit clicked")}
+        variant="primary"
+        fullWidth
+        onClick={handleSubmit}
+        disabled={items.length === 0}
       >
         Continue & Pay
       </Button>

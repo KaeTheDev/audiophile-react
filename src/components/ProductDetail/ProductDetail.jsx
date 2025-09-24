@@ -1,20 +1,21 @@
 import { useState } from "react";
+import { useCartDispatch } from "../../context/CartContext";
 import styles from "./ProductDetail.module.scss";
 import BackButton from "../BackButton/BackButton";
-import NumberPicker from "../Form-Elements/NumberPicker";
+import NumberPicker from "../form-elements/NumberPicker";
 import Button from "../Button/Button";
 
 export default function ProductDetail({ product }) {
   // State for quantity picker
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useCartDispatch();
 
   const BASE_URL = import.meta.env.BASE_URL || "/";
   const getProductImageSrc = (breakpoint) =>
     `${BASE_URL}assets/product-${product.slug}/${breakpoint}/image-product.jpg`;
   
   const handleAddToCart = () => {
-    // addItem(product, quantity);
-    console.log(`Added ${quantity} of ${product.name} to cart`);
+    dispatch({ type: "ADD_ITEM", payload: { product, quantity}});
   };
 
   return (

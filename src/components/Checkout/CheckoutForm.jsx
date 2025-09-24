@@ -1,42 +1,43 @@
-import { useState } from "react";
 import styles from "./CheckoutForm.module.scss";
 import RadioGroup from "../Form-Elements/RadioGroup";
 import TextField from "../Form-Elements/TextField";
 import BackButton from "../BackButton/BackButton";
 import codIcon from "../../assets/checkout/icon-cash-on-delivery.svg";
 
-export default function CheckoutForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    zip: "",
-    city: "",
-    country: "",
-    paymentMethod: "e-money",
-    eMoneyNumber: "",
-    eMoneyPin: "",
-  });
-
+export default function CheckoutForm({ formData, formErrors, onFormChange }) {
   function handleChange(e) {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const newFormData = { ...formData, [name]: value };
+    onFormChange(newFormData);
   }
 
   function handlePaymentChange(value) {
-    setFormData((prev) => ({ ...prev, paymentMethod: value }));
+    const newFormData = { ...formData, paymentMethod: value };
+    onFormChange(newFormData);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("Form Submitted: ", formData);
+    // Form submission is now handled by the parent component
   }
+
+  const hasErrors = Object.keys(formErrors).length > 0;
 
   return (
     <form className={styles["checkout-form"]} onSubmit={handleSubmit}>
       <BackButton />
       <h2 className={styles["checkout-form__title"]}>Checkout</h2>
+
+      {/* Form Validation Message */}
+      {hasErrors && (
+        <div
+          className={styles["validation-message"]}
+          role="alert"
+          aria-live="assertive"
+        >
+          <p>Please fill in all required fields before proceeding.</p>
+        </div>
+      )}
 
       {/* Billing */}
       <fieldset className={styles["checkout-form__section"]}>
@@ -49,6 +50,7 @@ export default function CheckoutForm() {
             value={formData.name}
             onChange={handleChange}
             required
+            error={formErrors.name}
           />
           <TextField
             label="Email Address"
@@ -58,6 +60,7 @@ export default function CheckoutForm() {
             value={formData.email}
             onChange={handleChange}
             required
+            error={formErrors.email}
           />
         </div>
         <div className={styles["checkout-form__row"]}>
@@ -68,6 +71,7 @@ export default function CheckoutForm() {
             value={formData.phone}
             onChange={handleChange}
             required
+            error={formErrors.phone}
           />
           <div style={{ flex: 1 }} />
         </div>
@@ -83,6 +87,7 @@ export default function CheckoutForm() {
           value={formData.address}
           onChange={handleChange}
           required
+          error={formErrors.address}
         />
         <div className={styles["checkout-form__row"]}>
           <TextField
@@ -92,6 +97,7 @@ export default function CheckoutForm() {
             value={formData.zip}
             onChange={handleChange}
             required
+            error={formErrors.zip}
           />
           <TextField
             label="City"
@@ -100,6 +106,7 @@ export default function CheckoutForm() {
             value={formData.city}
             onChange={handleChange}
             required
+            error={formErrors.city}
           />
         </div>
         <div className={styles["checkout-form__row"]}>
@@ -110,6 +117,7 @@ export default function CheckoutForm() {
             value={formData.country}
             onChange={handleChange}
             required
+            error={formErrors.country}
           />
           <div style={{ flex: 1 }} />
         </div>
@@ -118,12 +126,15 @@ export default function CheckoutForm() {
       {/* Payment */}
       <fieldset className={styles["checkout-form__section"]}>
         <legend>Payment Details</legend>
-
         <div className={styles["checkout-form__row"]}>
           <div style={{ flex: "1 1 0", alignSelf: "center" }}>
             <label
               htmlFor="paymentMethod"
-              style={{ fontWeight: "700", marginBottom: "0.5rem", display: "block" }}
+              style={{
+                fontWeight: "700",
+                marginBottom: "0.5rem",
+                display: "block",
+              }}
             >
               Payment Method
             </label>
@@ -150,6 +161,7 @@ export default function CheckoutForm() {
               value={formData.eMoneyNumber}
               onChange={handleChange}
               required
+              error={formErrors.eMoneyNumber}
             />
             <TextField
               label="e-Money PIN"
@@ -158,6 +170,7 @@ export default function CheckoutForm() {
               value={formData.eMoneyPin}
               onChange={handleChange}
               required
+              error={formErrors.eMoneyPin}
             />
           </div>
         )}
@@ -171,7 +184,8 @@ export default function CheckoutForm() {
               <p>
                 The "Cash on Delivery" option enables you to pay in cash when
                 our delivery courier arrives at your residence. Just make sure
-                your address is correct so that your order will not be cancelled.
+                your address is correct so that your order will not be
+                cancelled.
               </p>
             </div>
           </div>

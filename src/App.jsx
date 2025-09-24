@@ -16,6 +16,7 @@ import Navbar from "./components/Navbar/Navbar";
 import About from "./components/About/About";
 import Footer from "./components/Footer/Footer";
 
+
 function App() {
   const basename = process.env.NODE_ENV === "production" ? "/audiophile-react/" : "/";
   

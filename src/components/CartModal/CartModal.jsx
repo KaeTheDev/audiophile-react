@@ -1,50 +1,27 @@
 import React from "react";
 import styles from "./CartModal.module.scss";
 import CartItem from "../CartItem/CartItem";
-import Button from "../Button/Button"; // ✅ keep this
-
-// Mock cart items
-const mockItems = [
-  {
-    slug: "xx99-mark-two",
-    name: "XX99 Mark II Headphones",
-    price: 2999,
-    qty: 1,
-    image: {
-      desktop: "assets/product-xx99-mark-two-headphones/desktop/image-product.jpg",
-    },
-  },
-  {
-    slug: "zx9-speaker",
-    name: "ZX9 Speaker",
-    price: 4500,
-    qty: 2,
-    image: {
-      desktop: "assets/product-zx9-speaker/desktop/image-product.jpg",
-    },
-  },
-];
+import Button from "../Button/Button";
+import { useCart, useCartDispatch } from "../../context/CartContext";
 
 export default function CartModal() {
-  const [items, setItems] = React.useState(mockItems);
+  const items = useCart();
+  const dispatch = useCartDispatch();
 
   const total = items.reduce((acc, item) => acc + item.price * item.qty, 0);
 
+  const totalItems = items.reduce((acc, item) => acc + item.qty, 0);
+
   const handleRemoveAll = () => {
-    console.log("Remove all clicked");
-    setItems([]);
+    dispatch({ type: "CLEAR" });
   };
 
   const handleQtyChange = (slug, qty) => {
-    if (qty === 0) {
-      setItems((prev) => prev.filter((item) => item.slug !== slug));
-    } else {
-      setItems((prev) =>
-        prev.map((item) =>
-          item.slug === slug ? { ...item, qty } : item
-        )
-      );
-    }
+    dispatch({ type: "UPDATE_QTY", payload: { slug, qty } });
+  };
+
+  const handleRemove = (slug) => {
+    dispatch({ type: "REMOVE_ITEM", payload: { slug } });
   };
 
   const handleCheckout = () => {
@@ -52,7 +29,7 @@ export default function CartModal() {
       console.log("Your cart is empty. Add something before checking out!");
     } else {
       console.log("Proceed to checkout");
-      // window.location.href = "checkout.html"; // Uncomment when real
+      window.location.href = "/checkout"; // or your checkout route
     }
   };
 
@@ -60,8 +37,7 @@ export default function CartModal() {
     <div className={`${styles["cart-modal"]} ${styles["is-visible"]}`}>
       {/* Header */}
       <div className={styles["cart-modal__header"]}>
-        <h2 className={styles["cart-modal__title"]}>Cart ({items.length})</h2>
-        {/* Plain button for "Remove All" */}
+        <h2 className={styles["cart-modal__title"]}>Cart ({totalItems})</h2>
         <button
           className={styles["cart-modal__remove-all"]}
           onClick={handleRemoveAll}
@@ -74,8 +50,10 @@ export default function CartModal() {
       <div className={styles["cart-modal__items"]}>
         {items.length === 0 ? (
           <p className={styles["cart-modal__empty"]}>
-            Your cart is empty.<br />
-            Ready to upgrade your sound? 🎧<br />
+            Your cart is empty.
+            <br />
+            Ready to upgrade your sound? 🎧
+            <br />
             <a href="/index.html" className={styles["cart-modal__shop-link"]}>
               Continue Shopping
             </a>
@@ -88,11 +66,9 @@ export default function CartModal() {
               name={item.name}
               price={item.price}
               qty={item.qty}
-              image={item.image.desktop}
+              image={item.image.desktop || item.image} 
               onQtyChange={handleQtyChange}
-              onRemove={(slug) =>
-                setItems((prev) => prev.filter((item) => item.slug !== slug))
-              }
+              onRemove={() => handleRemove(item.slug)}
             />
           ))
         )}
@@ -106,13 +82,9 @@ export default function CartModal() {
         </span>
       </div>
 
-      {/* Checkout Button uses your Button component */}
+      {/* Checkout */}
       <div className={styles["cart-modal__checkout"]}>
-        <Button
-          label="Checkout"
-          variant="primary"
-          onClick={handleCheckout}
-        />
+        <Button label="Checkout" variant="primary" onClick={handleCheckout} />
       </div>
     </div>
   );

@@ -202,6 +202,21 @@
     }
   }
 
+  /* Validation message for the checkout form */
+.validation-message {
+  background-color: #fee;
+  border: 1px solid #fcc;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 24px;
+
+  p {
+    color: #d33;
+    font-size: 0.875rem;
+    margin: 0;
+    font-weight: 500;
+  }
+}
   /* Responsive layout */
   @media (max-width: 900px) {
     padding: 2rem 1.5rem;
