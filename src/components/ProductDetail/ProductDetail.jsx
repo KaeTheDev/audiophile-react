@@ -17,8 +17,14 @@ export default function ProductDetail({ product }) {
     `${BASE_URL}assets/product-${product.slug}/${breakpoint}/image-product.jpg`;
 
   const handleAddToCart = () => {
+    // Add item
     dispatch({ type: "ADD_ITEM", payload: { product, quantity } });
-    setIsCartOpen(true); // Always open cart on add
+
+    // Temporarily open cart for 3 seconds
+    setIsCartOpen(true);
+    setTimeout(() => setIsCartOpen(false), 3000);
+
+    // Show toast
     toast.custom((t) => (
       <div className={`toast ${t.visible ? "is-visible" : ""}`}>
         <div className="toast__message">
@@ -51,9 +57,9 @@ export default function ProductDetail({ product }) {
         </div>
         <div className={styles["product-detail__info"]}>
           {product.new && (
-              <p className={`${styles["product-detail__new"]} overline`}>
-                NEW PRODUCT
-              </p>
+            <p className={`${styles["product-detail__new"]} overline`}>
+              NEW PRODUCT
+            </p>
           )}
           <h1 className={`${styles["product-detail__name"]} heading-2`}>
             {product.name}

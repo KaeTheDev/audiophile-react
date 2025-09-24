@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./CartModal.module.scss";
 import CartItem from "../CartItem/CartItem";
 import Button from "../Button/Button";
@@ -9,32 +9,14 @@ export default function CartModal() {
   const items = useCart();
   const dispatch = useCartDispatch();
   const { setIsCartOpen } = useCartModal();
-  const [isClosing, setIsClosing] = useState(false);
 
   const BASE_URL = import.meta.env.BASE_URL || "/";
 
   const total = items.reduce((acc, item) => acc + item.price * item.qty, 0);
   const totalItems = items.reduce((acc, item) => acc + item.qty, 0);
 
-  // Optional fade-out animation
-  useEffect(() => {
-    const timer = setTimeout(() => setIsClosing(true), 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (isClosing) {
-      const timer = setTimeout(() => setIsCartOpen(false), 400);
-      return () => clearTimeout(timer);
-    }
-  }, [isClosing, setIsCartOpen]);
-
   return (
-    <div
-      className={`${styles["cart-modal"]} ${
-        isClosing ? styles["fade-out"] : styles["is-visible"]
-      }`}
-    >
+    <div className={`${styles["cart-modal"]} ${styles["is-visible"]}`}>
       {/* Header */}
       <div className={styles["cart-modal__header"]}>
         <h2 className={styles["cart-modal__title"]}>Cart ({totalItems})</h2>
